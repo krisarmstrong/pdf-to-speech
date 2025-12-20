@@ -2,9 +2,12 @@
 """
 Tests for PdfToSpeech.
 """
+from pathlib import Path
+
 import pytest
-from pdf_to_speech import __version__, extract_pdf_text
 from PyPDF2 import PdfWriter
+
+from pdf_to_speech import __version__, extract_pdf_text
 
 
 @pytest.fixture
@@ -18,15 +21,31 @@ def pdf_file(tmp_path):
         writer.write(f)
     return pdf_path, output_path
 
+
 def test_version() -> None:
     """Test version format."""
-    assert __version__ == "1.0.2"
+    try:
+        import tomllib  # Python 3.11+
+    except ModuleNotFoundError:
+        try:
+            import tomli as tomllib
+        except ModuleNotFoundError:
+            expected = "0.0.0"
+        else:
+            pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
+            expected = tomllib.loads(pyproject.read_text())["project"]["version"]
+    else:
+        pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
+        expected = tomllib.loads(pyproject.read_text())["project"]["version"]
+    assert __version__ == expected
+
 
 def test_extract_pdf_text(pdf_file) -> None:
     """Test extracting text from a PDF."""
     pdf_path, _ = pdf_file
     text = extract_pdf_text(str(pdf_path))
     assert text == ""
+
 
 def test_extract_pdf_text_invalid_file() -> None:
     """Test extracting text from an invalid PDF."""

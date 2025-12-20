@@ -9,18 +9,56 @@ Author: Kris Armstrong
 import argparse
 import logging
 import sys
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _pkg_version
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 import pyttsx3
 from gtts import gTTS
 from PyPDF2 import PdfReader
 
-__version__ = "1.0.2"
+
+def _find_pyproject(start: Path) -> Path | None:
+    for parent in (start, *start.parents):
+        candidate = parent / "pyproject.toml"
+        if candidate.is_file():
+            return candidate
+    return None
+
+
+def _read_pyproject_version() -> str:
+    try:
+        import tomllib  # Python 3.11+
+    except ModuleNotFoundError:
+        return "0.0.0"
+
+    pyproject = _find_pyproject(Path(__file__).resolve())
+    if not pyproject:
+        return "0.0.0"
+    try:
+        data = tomllib.loads(pyproject.read_text())
+    except Exception:
+        return "0.0.0"
+    return data.get("project", {}).get("version", "0.0.0")
+
+
+_pyproject_version = _read_pyproject_version()
+if _pyproject_version != "0.0.0":
+    __version__ = _pyproject_version
+else:
+    try:
+        __version__ = _pkg_version("pdf-to-speech")
+    except PackageNotFoundError:
+        __version__ = "0.0.0"
+
 
 class Config:
     """Global constants for PdfToSpeech."""
+
     LOG_FILE: str = "pdf_to_speech.log"
     ENCODING: str = "utf-8"
+
 
 def setup_logging(verbose: bool, logfile: str = Config.LOG_FILE) -> None:
     """Configure logging with rotating file handler.
@@ -40,6 +78,7 @@ def setup_logging(verbose: bool, logfile: str = Config.LOG_FILE) -> None:
             logging.StreamHandler(),
         ],
     )
+
 
 def parse_args() -> argparse.Namespace:
     """Parse command-line arguments.
@@ -63,6 +102,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--logfile", default=Config.LOG_FILE, help="Log file path")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     return parser.parse_args()
+
 
 def extract_pdf_text(input_file: str) -> str:
     """Extract text from a PDF file.
@@ -98,6 +138,7 @@ def extract_pdf_text(input_file: str) -> str:
         logging.error("Error extracting text from PDF: %s", e)
         raise
 
+
 def google_text_to_speech(text: str, output_file: str) -> None:
     """Convert text to speech using gTTS and save as MP3.
 
@@ -120,6 +161,7 @@ def google_text_to_speech(text: str, output_file: str) -> None:
     except Exception as e:
         logging.error("gTTS conversion failed: %s", e)
         raise
+
 
 def pyttsx3_text_to_speech(text: str, output_file: str) -> None:
     """Convert text to speech using pyttsx3 and save as MP3.
@@ -145,6 +187,7 @@ def pyttsx3_text_to_speech(text: str, output_file: str) -> None:
     except Exception as e:
         logging.error("pyttsx3 conversion failed: %s", e)
         raise
+
 
 def main() -> int:
     """Main entry point for PdfToSpeech.
@@ -177,6 +220,7 @@ def main() -> int:
     except Exception as e:
         logging.error("Error: %s", e)
         return 1
+
 
 if __name__ == "__main__":
     sys.exit(main())

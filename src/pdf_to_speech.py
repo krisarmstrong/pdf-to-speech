@@ -10,12 +10,12 @@ import argparse
 import logging
 import sys
 from logging.handlers import RotatingFileHandler
-from typing import Literal, Optional
-from PyPDF2 import PdfReader
-from gtts import gTTS
-import pyttsx3
 
-__version__ = "1.0.1"
+import pyttsx3
+from gtts import gTTS
+from PyPDF2 import PdfReader
+
+__version__ = "1.0.2"
 
 class Config:
     """Global constants for PdfToSpeech."""
@@ -88,7 +88,7 @@ def extract_pdf_text(input_file: str) -> str:
             clean_text = text.replace("\n", " ").strip()
             logging.debug("Extracted text length: %d characters", len(clean_text))
             return clean_text
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         logging.error("Input file not found: %s", input_file)
         raise
     except PermissionError as e:

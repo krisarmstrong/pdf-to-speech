@@ -1,5 +1,8 @@
 # PdfToSpeech
 
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Tests](https://img.shields.io/badge/Tests-pytest-passing) ![Status](https://img.shields.io/badge/Status-Active-success)
+
+
 Converts PDF documents to MP3 audio files using gTTS or pyttsx3.
 
 ## Installation
@@ -15,7 +18,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-python pdf_to_speech.py input.pdf output.mp3 --engine gtts --verbose
+python src/pdf_to_speech.py input.pdf output.mp3 --engine gtts --verbose
 ```
 
 - `input_file`: Input PDF file.
@@ -26,8 +29,7 @@ python pdf_to_speech.py input.pdf output.mp3 --engine gtts --verbose
 
 ## Files
 
-- `pdf_to_speech.py`: Main script.
-- `version_bumper.py`: Version management tool.
+- `src/pdf_to_speech.py`: Main script.
 - `tests/test_pdf_to_speech.py`: Pytest suite.
 - `requirements.txt`: Dependencies.
 - `CHANGELOG.md`: Version history.
@@ -41,8 +43,8 @@ python pdf_to_speech.py input.pdf output.mp3 --engine gtts --verbose
 gh repo create pdf-to-speech --public --source=. --remote=origin
 git init
 git add .
-git commit -m "Initial commit: PdfToSpeech v1.0.1"
-git tag v1.0.1
+git commit -m "Initial commit: PdfToSpeech v1.0.2"
+git tag v1.0.2
 git push origin main --tags
 ```
 

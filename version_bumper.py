@@ -11,11 +11,9 @@ import logging
 import os
 import re
 import subprocess
-from pathlib import Path
-from typing import Optional
 from datetime import datetime
 
-__version__ = "1.0.0"
+__version__ = "1.0.2"
 
 def setup_logging(verbose: bool) -> None:
     """Configure logging output.
@@ -46,7 +44,7 @@ def find_files(root: str, exclude_dirs: list[str]) -> list[str]:
                 python_files.append(os.path.join(dirpath, f))
     return python_files
 
-def bump_version_in_file(path: str, pattern: str, bump_type: str, dry_run: bool) -> Optional[str]:
+def bump_version_in_file(path: str, pattern: str, bump_type: str, dry_run: bool) -> str | None:
     """Bump version in file and return new version if changed.
 
     Args:
@@ -58,7 +56,7 @@ def bump_version_in_file(path: str, pattern: str, bump_type: str, dry_run: bool)
     Returns:
         New version string or None if unchanged.
     """
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         text = f.read()
     match = re.search(pattern, text)
     if not match:
@@ -96,10 +94,14 @@ def update_changelog(project: str, new_version: str, bump_type: str, dry_run: bo
     if not os.path.exists(changelog_path):
         logging.warning("CHANGELOG.md not found")
         return
-    with open(changelog_path, "r", encoding="utf-8") as f:
+    with open(changelog_path, encoding="utf-8") as f:
         content = f.read()
     today = datetime.now().strftime("%Y-%m-%d")
-    entry = f"\n## [{new_version}] - {today}\n\n### {bump_type.capitalize()}\n- Updated version with type annotations.\n"
+    entry = (
+        f"\n## [{new_version}] - {today}\n\n"
+        f"### {bump_type.capitalize()}\n"
+        "- Updated version with type annotations.\n"
+    )
     new_content = content + entry
     logging.info("Updating CHANGELOG.md with %s", new_version)
     if not dry_run:
@@ -123,7 +125,7 @@ def git_commit_and_tag(project: str, version: str, message: str, dry_run: bool) 
     for cmd in cmds:
         logging.debug("Running %s", cmd)
         if not dry_run:
-            subprocess.run(cmd, cwd=project, check=True)
+            subprocess.run(cmd, cwd=project, check=True)  # noqa: S603
 
 def main() -> None:
     """Main entry point for VersionBumper."""

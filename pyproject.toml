@@ -7,7 +7,7 @@ name = "pdf-to-speech"
 version = "1.0.3"
 description = "Automation tooling for pdf-to-speech."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 license = { file = "LICENSE" }
 authors = [
   { name = "Kris Armstrong" }
@@ -23,13 +23,11 @@ dev = [
 ]
 
 [tool.setuptools]
-package-dir = {"" = "src"}
 py-modules = ["pdf_to_speech"]
 
 [tool.pytest.ini_options]
 minversion = "8.0"
 addopts = "--maxfail=1 --disable-warnings"
-pythonpath = ["src"]
 
 [tool.ruff]
 line-length = 100

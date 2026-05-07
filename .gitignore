@@ -1,46 +1,92 @@
-# Python
-*.pyc
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║ PDF to Speech - .gitignore                                                ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║ Convert PDF documents to speech/audio files                               ║
+# ║ Stack: Python 3.x, TTS, PDF processing                                    ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+# ─── Python Core ─────────────────────────────────────────────────────────────
 __pycache__/
+*.py[cod]
+*$py.class
+*.pyc
 *.pyo
 *.pyd
-.Python
-env/
-venv/
+
+# ─── Virtual Environments ────────────────────────────────────────────────────
 .venv/
-.env
+venv/
+env/
 ENV/
-*.egg-info/
-dist/
+env.bak/
+venv.bak/
+.Python
+
+# ─── Distribution & Packaging ────────────────────────────────────────────────
 build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+MANIFEST
 *.whl
 
-# IDE
-.idea/
-.vscode/
-*.sublime-project
-*.sublime-workspace
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Tests/Output
+# ─── Testing & Coverage ──────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
 tests/output/
+
+# ─── Type Checking & Linting ─────────────────────────────────────────────────
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+
+# ─── Environment & Secrets ───────────────────────────────────────────────────
+.env
+.env.*
+.env.local
+
+# ─── Generated Audio Files ───────────────────────────────────────────────────
+# Audio output files (can be large)
+*.mp3
+*.wav
+*.ogg
+*.m4a
+*.aac
+*.flac
+
+# Generated text extracts
+extracted_text/
+*.txt.extracted
+
+# ─── Input PDFs (if stored locally for testing) ─────────────────────────────
+# Test PDFs (keep small samples in repo if needed)
+test_pdfs/
+samples/*.pdf
+!samples/example.pdf
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
 *.log
 *.log.*
 
-# Archive
+# ─── Temporary Files ─────────────────────────────────────────────────────────
+*.tmp
+*.temp
+*~
+.tmp_*
+
+# TTS cache/temporary files
+.tts_cache/
+temp_audio/
+
+# ─── Archives ────────────────────────────────────────────────────────────────
 *.zip
 *.tar.gz
-
-# Tooling defaults
-.env.*
-.mypy_cache/
-.pytest_cache/
-.ruff_cache/
-.coverage
-coverage.xml
-.eggs/
-.tox/
-.nox/
-*.code-workspace

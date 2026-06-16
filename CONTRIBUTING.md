@@ -9,4 +9,4 @@ We welcome contributions! Follow these steps:
 5. Push to your fork: `git push origin feature/your-feature`.
 6. Open a pull request against `main`.
 
-Ensure code passes linting (`flake8`, `black`, `isort`) and tests (`pytest`).
+Ensure code passes `ruff format --check`, `ruff check`, and tests (`pytest`).

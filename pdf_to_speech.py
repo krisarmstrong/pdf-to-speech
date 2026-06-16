@@ -6,6 +6,7 @@ Converts PDF documents to MP3 audio files using gTTS or pyttsx3.
 
 Author: Kris Armstrong
 """
+
 import argparse
 import logging
 import sys

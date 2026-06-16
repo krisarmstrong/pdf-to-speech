@@ -47,7 +47,7 @@ python pdf_to_speech.py document.pdf audio.mp3 --engine pyttsx3 --verbose
 
 ## Dependencies
 
-- PyPDF2 or pdfplumber: PDF text extraction
+- pypdf or pdfplumber: PDF text extraction
 - gTTS: Google Text-to-Speech
 - pyttsx3: Offline text-to-speech
 - ffmpeg: Audio processing (if needed)

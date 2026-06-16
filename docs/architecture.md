@@ -19,7 +19,7 @@ PdfToSpeech is a Python-based document-to-audio conversion tool that transforms 
 
 #### PDF Text Extraction
 
-Uses PyPDF2 or pdfplumber for:
+Uses pypdf or pdfplumber for:
 - Page-by-page text extraction
 - Text encoding handling
 - Layout preservation

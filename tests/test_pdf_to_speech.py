@@ -6,7 +6,7 @@ Tests for PdfToSpeech.
 from pathlib import Path
 
 import pytest
-from PyPDF2 import PdfWriter
+from pypdf import PdfWriter
 
 from pdf_to_speech import __version__, extract_pdf_text
 

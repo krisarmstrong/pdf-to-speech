@@ -17,7 +17,7 @@ from pathlib import Path
 
 import pyttsx3
 from gtts import gTTS
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 
 
 def _find_pyproject(start: Path) -> Path | None:

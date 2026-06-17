@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/krisarmstrong/pdf-to-speech/compare/v1.0.4...v1.1.0) (2026-06-17)
+
+
+### Features
+
+* modernize layout and bump to 1.0.2 ([22c2438](https://github.com/krisarmstrong/pdf-to-speech/commit/22c24381a58b4961bca03931a57f6c02b785494a))
+
+
+### Bug Fixes
+
+* **ci:** add missing noxfile and correct matrix python-version ([#15](https://github.com/krisarmstrong/pdf-to-speech/issues/15)) ([fefe0ad](https://github.com/krisarmstrong/pdf-to-speech/commit/fefe0adeaeb3ecf352ba9aeac715c919f772c8ef))
+* **ci:** pin release-please action commit ([#27](https://github.com/krisarmstrong/pdf-to-speech/issues/27)) ([5f0d8e3](https://github.com/krisarmstrong/pdf-to-speech/commit/5f0d8e3415c2362eb37b16a83a674b7687e4d6ea))
+
 ## [1.0.4](https://github.com/krisarmstrong/pdf-to-speech/compare/v1.0.3...v1.0.4) (2026-06-16)
 
 

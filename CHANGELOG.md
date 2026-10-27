@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1](https://github.com/krisarmstrong/pdf-to-speech/compare/v1.1.0...v1.1.1) (2026-10-27)
+
+
+### Bug Fixes
+
+* raise pypdf to 6.21.3 and refresh locked dependencies ([#55](https://github.com/krisarmstrong/pdf-to-speech/issues/55)) ([0aca28b](https://github.com/krisarmstrong/pdf-to-speech/commit/0aca28b287cf172e59ddbd7a8511e4613c5a68c6))
+
 ## [1.1.0](https://github.com/krisarmstrong/pdf-to-speech/compare/v1.0.4...v1.1.0) (2026-06-17)
 
 
